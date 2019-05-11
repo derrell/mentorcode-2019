@@ -27,124 +27,252 @@ public class Config
   }
 
   /**
-   * Returns the string at the given key. If this table does not have a value for that position,
-   * then the given backup value will be saved and returned.
+   * Sets the default for a given key. If no value has previously been saved
+   * for the given key, then the specified value will be saved as the key's
+   * value.
    *
-   * @param key    the key
-   * @param backup the value to return if none exists in the table
-   * @return either the value in the table, or the backup
+   * @param key The key
+   * @param value The value to use for this key if no value is already specified
    */
-  public String getString(String key, String backup) 
+  public void setDefaultInt(String key, int value) 
   {
+    int prefValue;
+
     // If this key hasn't been saved...
     if (! preferences.containsKey(key))
     {
-        // ... then save our backup
-        preferences.putString(key, backup);
+        // ... then save our value
+        preferences.putInt(key, value);
     }
-
-    // Retrieve the saved value. `backup` will never be used here.
-    return preferences.getString(key, backup);
+    else if ((prefValue = preferences.getInt(key, Integer.MIN_VALUE)) != value)
+    {
+      // Comparison of the previously-saved value with the current default
+      // specified in the code shows that the code is out of date (or a
+      // different value was saved inadvertently)
+      System.out.println(
+        "UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "key=" + key + ", code says:" + value + ", should say:" + prefValue);
+    }
   }
 
   /**
-   * Returns the int at the given key. If this table does not have a value for that position, then
-   * the given backup value will be saved and returned.
+   * Sets the default for a given key. If no value has previously been saved
+   * for the given key, then the specified value will be saved as the key's
+   * value.
    *
-   * @param key    the key
-   * @param backup the value to return if none exists in the table
-   * @return either the value in the table, or the backup
+   * @param key The key
+   * @param value The value to use for this key if no value is already specified
    */
-  public int getInt(String key, int backup) 
+  public void setDefaultLong(String key, long value) 
   {
+    long prefValue;
+
     // If this key hasn't been saved...
     if (! preferences.containsKey(key))
     {
-        // ... then save our backup
-        preferences.putInt(key, backup);
+        // ... then save our value
+        preferences.putLong(key, value);
     }
+    else if ((prefValue = preferences.getLong(key, Long.MIN_VALUE)) != value)
+    {
+      // Comparison of the previously-saved value with the current default
+      // specified in the code shows that the code is out of date (or a
+      // different value was saved inadvertently)
+      System.out.println(
+        "OBSOLETE UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "key=" + key + ", code says:" + value + ", should say:" + prefValue);
+    }
+  }
+
+  /**
+   * Sets the default for a given key. If no value has previously been saved
+   * for the given key, then the specified value will be saved as the key's
+   * value.
+   *
+   * @param key The key
+   * @param value The value to use for this key if no value is already specified
+   */
+  public void setDefaultFloat(String key, float value) 
+  {
+    float prefValue;
     
-    // Retrieve the saved value. `backup` will never be used here.
-    return preferences.getInt(key, backup);
+    // If this key hasn't been saved...
+    if (! preferences.containsKey(key))
+    {
+        // ... then save our value
+        preferences.putFloat(key, value);
+    }
+    else if ((prefValue = preferences.getFloat(key, Float.MIN_VALUE)) != value)
+    {
+      // Comparison of the previously-saved value with the current default
+      // specified in the code shows that the code is out of date (or a
+      // different value was saved inadvertently)
+      System.out.println(
+        "UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "key=" + key + ", code says:" + value + ", should say:" + prefValue);
+    }
   }
 
   /**
-   * Returns the double at the given key. If this table does not have a value for that position,
-   * then the given backup value will be saved and returned.
+   * Sets the default for a given key. If no value has previously been saved
+   * for the given key, then the specified value will be saved as the key's
+   * value.
    *
-   * @param key    the key
-   * @param backup the value to return if none exists in the table
-   * @return either the value in the table, or the backup
+   * @param key The key
+   * @param value The value to use for this key if no value is already specified
    */
-  public double getDouble(String key, double backup) 
+  public void setDefaultDouble(String key, double value) 
   {
+    double prefValue;
+    
     // If this key hasn't been saved...
-    if (!preferences.containsKey(key)) {
-      // ... then save our backup
-      preferences.putDouble(key, backup);
+    if (! preferences.containsKey(key))
+    {
+        // ... then save our value
+        preferences.putDouble(key, value);
     }
-
-    // Retrieve the saved value. `backup` will never be used here.
-    return preferences.getDouble(key, backup);
-}
-
-  /**
-   * Returns the boolean at the given key. If this table does not have a value for that position,
-   * then the given backup value will be saved and returned.
-   *
-   * @param key    the key
-   * @param backup the value to return if none exists in the table
-   * @return either the value in the table, or the backup
-   */
-  public boolean getBoolean(String key, boolean backup) 
-  {
-    // If this key hasn't been saved...
-    if (!preferences.containsKey(key)) {
-      // ... then save our backup
-      preferences.putBoolean(key, backup);
+    else if ((prefValue = preferences.getDouble(key, Double.MIN_VALUE)) != value)
+    {
+      // Comparison of the previously-saved value with the current default
+      // specified in the code shows that the code is out of date (or a
+      // different value was saved inadvertently)
+      System.out.println(
+        "UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "key=" + key + ", code says:" + value + ", should say:" + prefValue);
     }
-
-    // Retrieve the saved value. `backup` will never be used here.
-    return preferences.getBoolean(key, backup);
   }
 
   /**
-   * Returns the float at the given key. If this table does not have a value for that position, then
-   * the given backup value will be saved and returned.
+   * Sets the default for a given key. If no value has previously been saved
+   * for the given key, then the specified value will be saved as the key's
+   * value.
    *
-   * @param key    the key
-   * @param backup the value to return if none exists in the table
-   * @return either the value in the table, or the backup
+   * @param key The key
+   * @param value The value to use for this key if no value is already specified
    */
-  public float getFloat(String key, float backup) 
+  public void setDefaultString(String key, String value) 
   {
-    // If this key hasn't been saved...
-    if (!preferences.containsKey(key)) {
-      // ... then save our backup
-      preferences.putFloat(key, backup);
-    }
+    String prefValue;
 
-    // Retrieve the saved value. `backup` will never be used here.
-    return preferences.getFloat(key, backup);
+    // If this key hasn't been saved...
+    if (! preferences.containsKey(key))
+    {
+        // ... then save our value
+        preferences.putString(key, value);
+    }
+    else if ((prefValue = preferences.getString(key, null)) != value)
+    {
+      // Comparison of the previously-saved value with the current default
+      // specified in the code shows that the code is out of date (or a
+      // different value was saved inadvertently)
+      System.out.println(
+        "UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "key=" + key + ", code says:" + value + ", should say:" + prefValue);
+    }
   }
 
   /**
-   * Returns the long at the given key. If this table does not have a value for that position, then
-   * the given backup value will be saved and returned.
+   * Sets the default for a given key. If no value has previously been saved
+   * for the given key, then the specified value will be saved as the key's
+   * value.
    *
-   * @param key    the key
-   * @param backup the value to return if none exists in the table
-   * @return either the value in the table, or the backup
+   * @param key The key
+   * @param value The value to use for this key if no value is already specified
    */
-  public long getLong(String key, long backup) 
+  public void setDefaultBoolean(String key, boolean value) 
   {
-    // If this key hasn't been saved...
-    if (!preferences.containsKey(key)) {
-      // ... then save our backup
-      preferences.putLong(key, backup);
-    }
+    boolean prefValue;
 
-    // Retrieve the saved value. `backup` will never be used here.
-    return preferences.getLong(key, backup);
+    // If this key hasn't been saved...
+    if (! preferences.containsKey(key))
+    {
+        // ... then save our value
+        preferences.putBoolean(key, value);
+    }
+    else if ((prefValue = preferences.getBoolean(key, false)) != value)
+    {
+      // Comparison of the previously-saved value with the current default
+      // specified in the code shows that the code is out of date (or a
+      // different value was saved inadvertently)
+      System.out.println(
+        "UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "key=" + key + ", code says:" + value + ", should say:" + prefValue);
+    }
   }
-}
+
+  /**
+   * Returns the value at the given key. It is expected that the key will have
+   * been previously initialized with a call to the setDefaultInt method.
+   *
+   * @param key The key
+   * @return The previously saved value corresponding to this key.
+   */
+  public int getInt(String key) 
+  {
+    return preferences.getInt(key, Integer.MIN_VALUE);
+  }
+
+  /**
+   * Returns the value at the given key. It is expected that the key will have
+   * been previously initialized with a call to the setDefaultLong method.
+   *
+   * @param key The key
+   * @return The previously saved value corresponding to this key.
+   */
+  public long getLong(String key) 
+  {
+    return preferences.getLong(key, Long.MIN_VALUE);
+  }
+
+  /**
+   * Returns the value at the given key. It is expected that the key will
+   * have been previously initialized with a call to the 
+   * setDefault* method.
+   *
+   * @param key The key
+   * @return The previously saved value corresponding to this key.
+   */
+  public float getFloat(String key) 
+  {
+    return preferences.getFloat(key, Float.MIN_VALUE);
+  }
+
+  /**
+   * Returns the value at the given key. It is expected that the key will
+   * have been previously initialized with a call to the 
+   * setDefault* method.
+   *
+   * @param key The key
+   * @return The previously saved value corresponding to this key.
+   */
+  public double getDouble(String key) 
+  {
+    return preferences.getDouble(key, Double.MIN_VALUE);
+  }
+
+  /**
+   * Returns the value at the given key. It is expected that the key will
+   * have been previously initialized with a call to the 
+   * setDefault* method.
+   *
+   * @param key The key
+   * @return The previously saved value corresponding to this key.
+   */
+  public String getString(String key) 
+  {
+    return preferences.getString(key, null);
+  }
+
+  /**
+   * Returns the value at the given key. It is expected that the key will
+   * have been previously initialized with a call to the 
+   * setDefault* method.
+   *
+   * @param key The key
+   * @return The previously saved value corresponding to this key.
+   */
+  public Boolean getBoolean(String key) 
+  {
+    return preferences.getBoolean(key, false);
+  }
+
