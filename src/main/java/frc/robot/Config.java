@@ -226,8 +226,7 @@ public class Config
 
   /**
    * Returns the value at the given key. It is expected that the key will
-   * have been previously initialized with a call to the 
-   * setDefault* method.
+   * have been previously initialized with a call to the setDefaultFloat method.
    *
    * @param key The key
    * @return The previously saved value corresponding to this key.
@@ -239,8 +238,7 @@ public class Config
 
   /**
    * Returns the value at the given key. It is expected that the key will
-   * have been previously initialized with a call to the 
-   * setDefault* method.
+   * have been previously initialized with a call to the setDefaultDouble method.
    *
    * @param key The key
    * @return The previously saved value corresponding to this key.
@@ -252,8 +250,7 @@ public class Config
 
   /**
    * Returns the value at the given key. It is expected that the key will
-   * have been previously initialized with a call to the 
-   * setDefault* method.
+   * have been previously initialized with a call to the setDefaultString method.
    *
    * @param key The key
    * @return The previously saved value corresponding to this key.
@@ -265,8 +262,7 @@ public class Config
 
   /**
    * Returns the value at the given key. It is expected that the key will
-   * have been previously initialized with a call to the 
-   * setDefault* method.
+   * have been previously initialized with a call to the setDefaultBoolean method.
    *
    * @param key The key
    * @return The previously saved value corresponding to this key.
@@ -275,4 +271,4 @@ public class Config
   {
     return preferences.getBoolean(key, false);
   }
-
+}

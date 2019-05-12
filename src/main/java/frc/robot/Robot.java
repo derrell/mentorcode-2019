@@ -39,15 +39,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
 
-    Config config;
-    int value;
-
-    config = Config.getInstance();
-    value = config.getInt("Test set point", 23);
-    System.out.println("Test set point value is " + value);
-    value = config.getInt("Did not exist", 23);
-    System.out.println("Did not exist value is " + value);
-
     m_oi = new OI();
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
