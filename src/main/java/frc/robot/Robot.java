@@ -43,52 +43,7 @@ public class Robot extends TimedRobot {
     m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
     SmartDashboard.putData("Auto mode", m_chooser);
-
-    Boolean b;
-
-    MessageBus.subscribe("abc", (Data data) -> {
-      switch (data.getType()) {
-      case NUMBER:
-        System.out.println("NUMBER 1: " + data.getNumber());
-        break;
-
-      case STRING:
-        System.out.println("STRING 1: " + data.getString());
-        break;
-      }
-    });
-
-    MessageBus.subscribe("abc", (Data data) -> {
-      switch (data.getType()) {
-      case NUMBER:
-        System.out.println("NUMBER 2: " + data.getNumber());
-        break;
-
-      case STRING:
-        System.out.println("STRING 2: " + data.getString());
-        break;
-      }
-    });
-
-    MessageBus.subscribe("abcd", (Data data) -> {
-      switch (data.getType()) {
-      case NUMBER:
-        System.out.println("NUMBER 3: " + data.getNumber());
-        break;
-
-      case STRING:
-        System.out.println("STRING 3: " + data.getString());
-        break;
-      }
-    });
-
-    b = MessageBus.dispatch("abc", new Data("xyz"));
-    System.out.println("dispatch returned " + b);
-    b = MessageBus.dispatch("abc", new Data(23));
-    System.out.println("dispatch returned " + b);
-    b = MessageBus.dispatch("abcd", new Data(42));
-    System.out.println("dispatch returned " + b);
-  }
+ }
 
   /**
    * This function is called every robot packet, no matter the mode. Use
