@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "/home/derrell/ME/frc/2019/mentor"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"files.exclude": {
+			"**/.classpath": true,
+			"**/.project": true,
+			"**/.settings": true,
+			"**/.factorypath": true
+		}
+	}
+}

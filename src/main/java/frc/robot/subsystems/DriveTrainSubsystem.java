@@ -14,13 +14,16 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Config;
+import frc.robot.commands.DriveDefault;
 
 /**
  * An example subsystem. You can replace me with your own Subsystem.
  */
-public class DriveTrainSubsystem extends Subsystem {
-  double speed = 0.0;
+public class DriveTrainSubsystem extends Subsystem 
+{
+  private double speed = 0.0;
   private CANSparkMax sparkFrontLeft;
   private CANSparkMax sparkFrontRight;
   private CANSparkMax sparkRearLeft;
@@ -30,8 +33,10 @@ public class DriveTrainSubsystem extends Subsystem {
   private CANEncoder encoderFrontRight;
   private CANEncoder encoderRearLeft;
   private CANEncoder encoderRearRight;
+  private static DriveTrainSubsystem singleton = null;
 
-  public DriveTrainSubsystem() {
+  private DriveTrainSubsystem() 
+  {
     super("DriveTrainSubsystem");
 
     int canFrontLeft;
@@ -65,6 +70,12 @@ public class DriveTrainSubsystem extends Subsystem {
     sparkRearLeft = new CANSparkMax(canRearLeft, MotorType.kBrushless);
     sparkRearRight = new CANSparkMax(canRearRight, MotorType.kBrushless);
 
+    // For sanity sake, set motor controllers back to their difault values
+    sparkFrontLeft.restoreFactoryDefaults();
+    sparkFrontRight.restoreFactoryDefaults();
+    sparkRearLeft.restoreFactoryDefaults();
+    sparkRearRight.restoreFactoryDefaults();
+
     // Left and right motors get their own unique speed controller groups, so they oeprate as a pair
     scgLeft = new SpeedControllerGroup(sparkFrontLeft, sparkRearLeft);
     scgRight = new SpeedControllerGroup(sparkFrontRight, sparkRearRight);
@@ -79,6 +90,21 @@ public class DriveTrainSubsystem extends Subsystem {
     drive = new DifferentialDrive(scgLeft, scgRight);
   }
 
+  static public DriveTrainSubsystem getInstance()
+  {
+    if (DriveTrainSubsystem.singleton == null)
+    {
+      DriveTrainSubsystem.singleton = new DriveTrainSubsystem();
+    }
+
+    return DriveTrainSubsystem.singleton;
+  }
+
+  public DifferentialDrive getDrive()
+  {
+    return drive;
+  }
+
   public void drive(double speed, double distance)
   {
     // Clamp the speed to legal values
@@ -89,25 +115,43 @@ public class DriveTrainSubsystem extends Subsystem {
     this.speed = speed;
  }
 
-  public void periodic()
+ public double getEncoderFrontLeft()
+ {
+   return encoderFrontLeft.getPosition();
+ }
+
+ public double getEncoderFrontRight()
+ {
+   return encoderFrontRight.getPosition();
+ }
+
+ public double getEncoderRearLeft()
+ {
+   return encoderRearLeft.getPosition();
+ }
+
+ public double getEncoderRearRight()
+ {
+   return encoderRearRight.getPosition();
+ }
+
+public void periodic()
   {
-   // Drive straight ahead (forward or backwards) at the specified speed.
+    double  currentEncoder;
+
+    // Drive straight ahead (forward or backwards) at the specified speed.
     drive.arcadeDrive(speed, 0.0);
+
+    currentEncoder = this.getEncoderFrontLeft();
+    SmartDashboard.putNumber("current encoder value", currentEncoder);
+
   }
 
   @Override
-  public void initDefaultCommand() {
-    Config config;
-
-    // Get a reference to the configuration
-    config = Config.getInstance();
-
+  public void initDefaultCommand() 
+  {
     // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
-    
-    int setpoint = config.getInt("example:setpoint");
-
-    drive(0.4, 10.0);
+    setDefaultCommand(new DriveDefault());
   }
 }
 

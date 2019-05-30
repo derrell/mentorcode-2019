@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.DriveDistance;
+//import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 import org.lipman.MessageBus.*;
@@ -26,7 +27,7 @@ import org.lipman.MessageBus.*;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveTrainSubsystem m_subsystem = new DriveTrainSubsystem();
+  public static DriveTrainSubsystem m_subsystem = DriveTrainSubsystem.getInstance();
   public static OI m_oi;
 
   Command m_autonomousCommand;
@@ -40,9 +41,11 @@ public class Robot extends TimedRobot {
   public void robotInit() {
 
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
+    //m_chooser.setDefaultOption("Default Auto", new ExampleCommand());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    // SmartDashboard.putData("Auto mode", m_chooser);
+
+    SmartDashboard.putData(new DriveDistance());
  }
 
   /**
