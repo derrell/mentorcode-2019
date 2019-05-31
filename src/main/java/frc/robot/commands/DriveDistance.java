@@ -57,6 +57,8 @@ public class DriveDistance extends Command
   @Override
   protected boolean isFinished()
   {
+    double error;
+    double speed = 0.4;
     double distance;
     double rotations;
     double endPosition;
@@ -66,6 +68,9 @@ public class DriveDistance extends Command
     SmartDashboard.putString("state", "isFinished");
     distance = config.getInt("command:drive:distance:inches");
 
+    // KLUDGE: We overshoot, so deduct that from the distance for now. 
+    distance *= 29.0 / 30.0;
+
     // Convert distance to rotations. We recalculate this each time to allow
     // for the values to be changed while we're running.
     // Gearbox yields 7.31 motor revolutions per motor output revolution
@@ -73,6 +78,17 @@ public class DriveDistance extends Command
     rotations = (distance * 7.31) / (6.0 * Math.PI);
 
     endPosition = startPosition + rotations;
+
+    error = Math.abs(endPosition - encoderValue);
+    if (error < 4.0)
+    {
+      speed = (error / 4.0) * 0.4;
+      if (speed < 0.25) speed = 0.25;
+      drive.arcadeDrive(speed, 0.0);
+    }
+
+    SmartDashboard.putNumber("error", error);
+    SmartDashboard.putNumber("speed", speed);
     SmartDashboard.putNumber("startPosition", startPosition);
     SmartDashboard.putNumber("distance", distance);
     SmartDashboard.putNumber("rotations", rotations);
