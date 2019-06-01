@@ -79,7 +79,7 @@ public class Config
       // specified in the code shows that the code is out of date (or a
       // different value was saved inadvertently)
       System.out.println(
-        "OBSOLETE UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
+        "UPDATE THE CODE: OBSOLETE DEFAULT WILL NOT OVERWRITE PREFERENCES VALUE:" +
         "key=" + key + ", code says:" + value + ", should say:" + prefValue);
     }
   }
